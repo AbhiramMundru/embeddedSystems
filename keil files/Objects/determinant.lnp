@@ -1,0 +1,3 @@
+".\Objects\det2x2.obj" 
+TO ".\Objects\determinant" 
+PRINT(".\Listings\determinant.m51")

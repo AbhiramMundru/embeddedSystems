@@ -1,0 +1,3 @@
+".\Objects\hexkey.obj" 
+TO ".\Objects\hexkeypad" 
+PRINT(".\Listings\hexkeypad.m51")

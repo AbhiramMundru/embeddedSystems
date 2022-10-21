@@ -1,0 +1,48 @@
+A51 MACRO ASSEMBLER  BLINKLED                                                             10/21/2022 11:42:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\blinkled.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE blinkled.a51 SET(SMALL) DEBUG PRINT(.\Listings\blinkled.lst) OBJECT(.\O
+                      bjects\blinkled.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 8033              2     SJMP START
+0035                   3     ORG 0035H
+0035 780F              4     START: MOV R0, #15 
+0037 B290              5     CPL P1.0
+0039 850189            6     MOV TMOD, 01H ; using timer 0 in mode 1
+003C 758C00            7     REPEAT: MOV TH0, #00H
+003F 758A00            8     MOV TL0, #00H ; maximum delay
+0042 D28C              9     SETB TR0 ; starting counter
+0044 308DFD           10     CHECK: JNB TF0, CHECK ; waiting until TF0 flag is set
+0047 C28C             11     CLR TR0 ; stopping timer
+0049 C28D             12     CLR TF0 ; clearing overflow flag
+004B D8EF             13     DJNZ R0, REPEAT ; loop 15 times
+004D 80E6             14     JMP START
+                      15     END
+A51 MACRO ASSEMBLER  BLINKLED                                                             10/21/2022 11:42:46 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHECK. . . . . . .  C ADDR   0044H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+REPEAT . . . . . .  C ADDR   003CH   A   
+START. . . . . . .  C ADDR   0035H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

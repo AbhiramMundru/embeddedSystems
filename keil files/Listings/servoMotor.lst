@@ -1,0 +1,131 @@
+A51 MACRO ASSEMBLER  SERVOMOTOR                                                           10/20/2022 17:32:20 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\servoMotor.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE servoMotor.a51 SET(SMALL) DEBUG PRINT(.\Listings\servoMotor.lst) OBJECT
+                      (.\Objects\servoMotor.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H          
+0000 8033              2             SJMP MAIN
+0035                   3                      ORG 0035H
+0035 C2A0              4                              MAIN:CLR P2.0;
+0037 758901            5                   MOV TMOD, #01H ;using Timer 0 in Mode 1
+003A 120075            6                   LCALL one_eighty_degrees
+003D 1185              7                               ACALL delay
+003F 120065            8                               LCALL ninety_degrees
+0042 80F1              9                   SJMP MAIN ;to repeat the loop until manually stopped
+                      10                                        
+0055                  11     ORG 0055H
+0055                  12               zero_degrees:  
+0055 758CFC           13               MOV TH0, #0FCH  
+0058 758A19           14               MOV TL0, #19H  
+005B D2A0             15               SETB P2.0 ;Make P2.0 HIGH
+005D D28C             16               SETB TR0 ;Start the timer 0
+005F 308DFD           17               WAIT1:JNB TF0, WAIT1 ;Wait till the TF0 flag is set 
+0062 C28D             18               CLR TF0 ;Clear the flag manually
+0064 C28C             19               CLR TR0 ;Stop the timer 0
+0066 758CB5           20                       MOV TH0, #0B5H  
+0069 758AC8           21               MOV TL0, #0C8H  
+006C C2A0             22               CLR P2.0 ;Make P2.0 HIGH
+006E D28C             23               SETB TR0 ;Start the timer 0
+0070 308DFD           24               WAIT2:JNB TF0, WAIT2 ;Wait till the TF0 flag is set 
+0073 C28D             25               CLR TF0 ;Clear the flag manually
+0075 C28C             26               CLR TR0 ;Stop the timer 0
+0077 22               27                RET
+                      28                        
+                      29                        
+                      30                        
+0065                  31     ORG 0065H
+0065                  32                       ninety_degrees:  
+0065 758CFA           33               MOV TH0, #0FAH  
+0068 758A25           34               MOV TL0, #25H  
+006B D2A0             35               SETB P2.0 ;Make P2.0 HIGH
+006D D28C             36               SETB TR0 ;Start the timer 0
+006F 308DFD           37               WAIT3:JNB TF0, WAIT3 ;Wait till the TF0 flag is set 
+0072 C28D             38               CLR TF0 ;Clear the flag manually
+0074 C28C             39               CLR TR0 ;Stop the timer 0
+0076 758CB7           40                       MOV TH0, #0B7H  
+0079 758ABC           41               MOV TL0, #0BCH  
+007C C2A0             42               CLR P2.0 ;Make P2.0 HIGH
+007E D28C             43               SETB TR0 ;Start the timer 0
+0080 308DFD           44               WAIT4:JNB TF0, WAIT4 ;Wait till the TF0 flag is set 
+0083 C28D             45               CLR TF0 ;Clear the flag manually
+0085 C28C             46               CLR TR0 ;Stop the timer 0
+0087 22               47               RET 
+                      48     
+0075                  49     ORG 0075H
+0075                  50                       one_eighty_degrees:  
+0075 758CF8           51               MOV TH0, #0F8H  
+0078 758A31           52               MOV TL0, #31H  
+007B D2A0             53               SETB P2.0 ;Make P2.0 HIGH
+007D D28C             54               SETB TR0 ;Start the timer 0
+007F 308DFD           55               WAIT5:JNB TF0, WAIT5 ;Wait till the TF0 flag is set 
+0082 C28D             56               CLR TF0 ;Clear the flag manually
+0084 C28C             57               CLR TR0 ;Stop the timer 0
+A51 MACRO ASSEMBLER  SERVOMOTOR                                                           10/20/2022 17:32:20 PAGE     2
+
+0086 758CB9           58                       MOV TH0, #0B9H  
+0089 758AB0           59               MOV TL0, #0B0H  
+008C C2A0             60               CLR P2.0 ;Make P2.0 HIGH
+008E D28C             61               SETB TR0 ;Start the timer 0
+0090 308DFD           62               WAIT6:JNB TF0, WAIT6 ;Wait till the TF0 flag is set 
+0093 C28D             63               CLR TF0 ;Clear the flag manually
+0095 C28C             64               CLR TR0 ;Stop the timer 0
+0097 22               65                    RET 
+                      66                                
+                      67                                                        
+0085                  68     ORG 0085H
+0085                  69                               delay:  
+0085 7C0F             70                               MOV R4, #15
+0087 758C00           71                   SECOND:MOV TH0, #00H
+008A 758A00           72                               MOV TL0, #00H
+008D D28C             73                               SETB TR0
+008F 308DFD           74                               CHECK: JNB TF0, CHECK
+0092 C28D             75                               CLR TF0
+0094 C28C             76                               CLR TR0
+0096 DCEF             77                               DJNZ R4, SECOND
+0098 22               78                   RET
+                      79                                                                     
+                      80                 END
+                             
+                             
+                             
+                             
+                             
+                             
+A51 MACRO ASSEMBLER  SERVOMOTOR                                                           10/20/2022 17:32:20 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHECK. . . . . . .  C ADDR   008FH   A   
+DELAY. . . . . . .  C ADDR   0085H   A   
+MAIN . . . . . . .  C ADDR   0035H   A   
+NINETY_DEGREES . .  C ADDR   0065H   A   
+ONE_EIGHTY_DEGREES  C ADDR   0075H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+SECOND . . . . . .  C ADDR   0087H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+WAIT1. . . . . . .  C ADDR   005FH   A   
+WAIT2. . . . . . .  C ADDR   0070H   A   
+WAIT3. . . . . . .  C ADDR   006FH   A   
+WAIT4. . . . . . .  C ADDR   0080H   A   
+WAIT5. . . . . . .  C ADDR   007FH   A   
+WAIT6. . . . . . .  C ADDR   0090H   A   
+ZERO_DEGREES . . .  C ADDR   0055H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

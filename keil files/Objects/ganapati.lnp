@@ -1,0 +1,3 @@
+".\Objects\ganapatiLED.obj" 
+TO ".\Objects\ganapati" 
+PRINT(".\Listings\ganapati.m51")

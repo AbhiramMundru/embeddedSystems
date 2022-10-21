@@ -1,0 +1,53 @@
+A51 MACRO ASSEMBLER  MAX5                                                                 10/21/2022 12:02:14 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+NO OBJECT MODULE REQUESTED
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE max5.a51 SET(SMALL) DEBUG PRINT(.\Listings\max5.lst) OBJECT(.\Objects\m
+                      ax5.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 8033              2     SJMP START
+0035                   3     ORG 0035H
+0035 7400              4     START: MOV A, #00H 
+0037 7800              5     MOV R0, #00H ; clearing R0 to store maximum number
+0039 900090            6     MOV DPTR, #90H ; assuming data stored is from 90H
+003C 790A              7     MOV R1, #10 ; loop 10 times
+003E                   8     LOOP: MOVC A, @DPTR 
+*** _______________________________________^
+*** ERROR #A39 IN 8 (max5.a51, LINE 8): REGISTER OPERAND EXPECTED
+003E C3                9     CLR C 
+003F A3               10     INC DPTR ; pointing to next location
+0040 95F0             11     SUBB A, B 
+0042 5003             12     JNC SKIP ; if carry, then b > a
+0044                  13     MOV RO, B ; store maximum number in R0
+*** _____________________________^
+*** ERROR #A45 IN 13 (max5.a51, LINE 13): UNDEFINED SYMBOL (PASS-2)
+0047 E8               14     SKIP: MOV A, R0 ; compare max number till now with next number
+0048 D9F4             15     DJNZ R1, LOOP ; loop for 10 times
+                      16     END 
+                             
+                             ORG 0090H
+*** WARNING #A73 IN 18 (max5.a51, LINE 18): TEXT FOUND BEYOND END STATEMENT - IGNORED
+                                     DB 4 , 5, 6, 7, 8
+A51 MACRO ASSEMBLER  MAX5                                                                 10/21/2022 12:02:14 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+LOOP . . . . . . .  C ADDR   003EH   A   
+RO . . . . . . . .    ----   -----       
+SKIP . . . . . . .  C ADDR   0047H   A   
+START. . . . . . .  C ADDR   0035H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 2 ERROR(S)

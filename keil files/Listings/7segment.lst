@@ -1,0 +1,65 @@
+A51 MACRO ASSEMBLER  7SEGMENT                                                             10/21/2022 12:16:58 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\7segment.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE 7segment.a51 SET(SMALL) DEBUG PRINT(.\Listings\7segment.lst) OBJECT(.\O
+                      bjects\7segment.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 8036              2      SJMP START
+4000                   3      ORG 4000H
+4000 3F065B4F          4              DB 3FH, 06H, 5BH, 4FH, 66H, 6DH, 7DH, 07H, 7FH, 6FH, 0
+4004 666D7D07                
+4008 7F6F00                  
+                       5                      
+0035                   6                      ORG 0035H
+0035 75A000            7                              MOV P2, #00H
+0038 904000            8                              START:MOV DPTR,#4000H
+003B E4                9              REPEAT:CLR A;
+003C 93               10     MOVC A, @A+DPTR
+003D F5A0             11     MOV P2,A
+003F 1147             12     ACALL DELAY
+0041 A3               13     INC DPTR
+0042 B500F6           14     CJNE A,0,REPEAT
+0045 80F1             15     SJMP START
+                      16     
+0047 780F             17     DELAY: MOV R0, #15
+0049 758901           18     MOV TMOD, #01H 
+004C 758C00           19     LOOP:MOV TH0, #00H
+004F 758A00           20     MOV TL0, #00H
+0052 D28C             21     SETB TR0
+0054 308DFD           22     CHECK: JNB TF0, CHECK
+0057 C28D             23     CLR TF0
+0059 C28C             24     CLR TR0
+005B D8EF             25     DJNZ R0, LOOP
+005D 22               26     RET
+                      27     
+                      28     END
+A51 MACRO ASSEMBLER  7SEGMENT                                                             10/21/2022 12:16:58 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHECK. . . . . . .  C ADDR   0054H   A   
+DELAY. . . . . . .  C ADDR   0047H   A   
+LOOP . . . . . . .  C ADDR   004CH   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+REPEAT . . . . . .  C ADDR   003BH   A   
+START. . . . . . .  C ADDR   0038H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

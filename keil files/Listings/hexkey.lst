@@ -1,0 +1,138 @@
+A51 MACRO ASSEMBLER  HEXKEY                                                               10/21/2022 11:30:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\hexkey.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE hexkey.a51 SET(SMALL) DEBUG PRINT(.\Listings\hexkey.lst) OBJECT(.\Objec
+                      ts\hexkey.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 8033              2             SJMP START
+0035                   3             ORG 0035H
+                       4                     
+0035 9000C5            5                     START:MOV DPTR,#LUT  
+0038 7400              6                     MOV A,#0000000B  
+003A 75A000            7                     MOV P2,#00000000B  
+                       8     
+003D 7590FF            9                     BACK:MOV P1,#0FFH  
+0040 C290             10          CLR P1.0   
+0042 209404           11          JB P1.4,NEXT1   
+0045 7400             12          MOV A,#0    
+0047 11C1             13          ACALL DISPLAY   
+0049 209504           14     NEXT1:JB P1.5,NEXT2 
+004C 7401             15           MOV A,#1  
+004E 11C1             16           ACALL DISPLAY 
+0050 209604           17     NEXT2:JB P1.6,NEXT3  
+0053 7402             18           MOV A,#2  
+0055 11C1             19           ACALL DISPLAY  
+0057 209704           20     NEXT3:JB P1.7,NEXT4  
+005A 7403             21           MOV A,#3  
+005C 11C1             22           ACALL DISPLAY  
+                      23               
+005E D290             24     NEXT4:SETB P1.0  
+0060 C291             25           CLR P1.1  
+0062 209404           26           JB P1.4,NEXT5  
+0065 7404             27           MOV A,#4  
+0067 11C1             28           ACALL DISPLAY  
+0069 209504           29     NEXT5:JB P1.5,NEXT6  
+006C 7405             30           MOV A,#5  
+006E 11C1             31           ACALL DISPLAY  
+0070 209604           32     NEXT6:JB P1.6,NEXT7  
+0073 7406             33           MOV A,#6  
+0075 11C1             34           ACALL DISPLAY  
+0077 209704           35     NEXT7:JB P1.7,NEXT8  
+007A 7407             36           MOV A,#7  
+007C 11C1             37           ACALL DISPLAY
+                      38               
+007E D291             39     NEXT8:SETB P1.1  
+0080 C292             40           CLR P1.2  
+0082 209404           41           JB P1.4,NEXT9  
+0085 7408             42           MOV A,#8  
+0087 11C1             43           ACALL DISPLAY  
+0089 209504           44     NEXT9:JB P1.5,NEXT10  
+008C 7409             45           MOV A,#9  
+008E 11C1             46           ACALL DISPLAY  
+0090 209604           47     NEXT10:JB P1.6,NEXT11  
+0093 740A             48            MOV A,#10  
+0095 11C1             49            ACALL DISPLAY  
+0097 209704           50     NEXT11:JB P1.7,NEXT12  
+009A 740B             51            MOV A,#11  
+009C 11C1             52            ACALL DISPLAY  
+                      53                
+009E D292             54     NEXT12:SETB P1.2  
+00A0 C293             55            CLR P1.3  
+00A2 209404           56            JB P1.4,NEXT13  
+00A5 740C             57            MOV A,#12  
+A51 MACRO ASSEMBLER  HEXKEY                                                               10/21/2022 11:30:28 PAGE     2
+
+00A7 11C1             58            ACALL DISPLAY  
+00A9 209504           59     NEXT13:JB P1.5,NEXT14  
+00AC 740D             60            MOV A,#13  
+00AE 11C1             61            ACALL DISPLAY  
+00B0 209604           62     NEXT14:JB P1.6,NEXT15  
+00B3 740E             63            MOV A,#14  
+00B5 11C1             64            ACALL DISPLAY  
+00B7 209783           65     NEXT15: JB P1.7,BACK  
+00BA 740F             66            MOV A, #15  
+00BC 11C1             67            ACALL DISPLAY  
+00BE 02003D           68            LJMP BACK  
+                      69     
+00C1 93               70     DISPLAY: MOVC A, @A+DPTR  
+00C2 F5A0             71             MOV P2, A        
+00C4 22               72             RET
+                      73     
+                      74     
+00C5 07               75     LUT: DB 00000111B  
+00C6 7F               76          DB 01111111B  
+00C7 6F               77          DB 01101111B  
+00C8 71               78          DB 01110001B  
+00C9 66               79          DB 01100110B  
+00CA 6D               80          DB 01101101B  
+00CB 7D               81          DB 01111101B  
+00CC 79               82          DB 01111001B  
+00CD 06               83          DB 00000110B  
+00CE 5B               84          DB 01011011B  
+00CF 4F               85          DB 01001111B  
+00D0 5E               86          DB 01011110B  
+00D1 77               87          DB 01110111B  
+00D2 3F               88          DB 00111111B  
+00D3 7C               89          DB 01111100B  
+00D4 39               90          DB 00111001B  
+                      91          END
+A51 MACRO ASSEMBLER  HEXKEY                                                               10/21/2022 11:30:28 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BACK . . . . . . .  C ADDR   003DH   A   
+DISPLAY. . . . . .  C ADDR   00C1H   A   
+LUT. . . . . . . .  C ADDR   00C5H   A   
+NEXT1. . . . . . .  C ADDR   0049H   A   
+NEXT10 . . . . . .  C ADDR   0090H   A   
+NEXT11 . . . . . .  C ADDR   0097H   A   
+NEXT12 . . . . . .  C ADDR   009EH   A   
+NEXT13 . . . . . .  C ADDR   00A9H   A   
+NEXT14 . . . . . .  C ADDR   00B0H   A   
+NEXT15 . . . . . .  C ADDR   00B7H   A   
+NEXT2. . . . . . .  C ADDR   0050H   A   
+NEXT3. . . . . . .  C ADDR   0057H   A   
+NEXT4. . . . . . .  C ADDR   005EH   A   
+NEXT5. . . . . . .  C ADDR   0069H   A   
+NEXT6. . . . . . .  C ADDR   0070H   A   
+NEXT7. . . . . . .  C ADDR   0077H   A   
+NEXT8. . . . . . .  C ADDR   007EH   A   
+NEXT9. . . . . . .  C ADDR   0089H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0035H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
